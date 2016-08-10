@@ -1,0 +1,15 @@
+h1 {
+  color: red;
+}
+
+td {
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
+  height: 50px;
+  width: 50px;
+}
+
+.hitColor {
+  background-color:red;
+}
