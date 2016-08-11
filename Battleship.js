@@ -32,7 +32,7 @@ $(document).ready(function() {
       // the array elements will appear
       console.log(clicked);
       // if the first index and the second index of the board is of the same value of board [row] [column] is -1
-      if (board[clicked[0]][clicked[1]] === -1){
+      if (board[clicked[0]][clicked[1]] === showShips){
         //create a color when user misses
         $(("#" + clicked[0] + clicked[1])).addClass("hitColor");
         counterOfHits ++;
@@ -45,6 +45,7 @@ $(document).ready(function() {
       }
       if(counterOfHits < 5 && torpedosLeft === 0){
         $("#result").text("You are not the man, YOU LOSE");
+        revealShips();
       }
       //this prints out the amount of Torpedos that the user has
       $("#torpedoCounter").text("Torpedo Counter: " + torpedosLeft);
@@ -81,6 +82,9 @@ var SHIP = 0;
 var row;
 var column;
 var counterOfHits = 0;
+var answers = [];
+// variable to show value of a ship to equal -1 on our board
+var showShips = -1;
 
 //purpose: randomly place 5 ships
 //signature: takes nothing and gives back an index
@@ -91,7 +95,7 @@ function placeShip(){
     var row = Math.floor(Math.random() * 10);
     var column = Math.floor(Math.random() * 10);
     SHIP = SHIP + 1;
-    board[row][column] = -1;
+    board[row][column] = showShips;
   }
 }
 
@@ -106,3 +110,20 @@ var torpedosLeft = 25;
 function fireTorpedo (){
   torpedosLeft -= 1;
 }
+
+// Purpose: to find the location/coordinates of the placed ships and add a class to the td
+ // Signature: nothing --> string
+ // Example: revealShips() --> $('#' + x + y).addClass("hereTheyAre")
+ function revealShips() {
+  // each row up to 10
+   for (var row = 0; row < 10; row ++) {
+    //  each column up to 10
+     for ( var col = 0; col < 10; col ++) {
+      //  if view of board equals showShips (both will be -1)
+       if (board[row][col] === showShips) {
+        //the id will add a class of reveal to change the color of the ships to show them where they were
+        $("#" + row + col).addClass("reveal");
+        }
+      }
+    }
+  }
