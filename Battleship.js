@@ -43,6 +43,9 @@ $(document).ready(function() {
       if (counterOfHits===5) {
         $("#result").text("You win; you da man");
       }
+      if(counterOfHits < 5 && torpedosLeft === 0){
+        $("#result").text("You are not the man, YOU LOSE");
+      }
       //this prints out the amount of Torpedos that the user has
       $("#torpedoCounter").text("Torpedo Counter: " + torpedosLeft);
       $("#hitCounter").text("Hits: " + counterOfHits);
