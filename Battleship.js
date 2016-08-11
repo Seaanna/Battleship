@@ -23,29 +23,32 @@ $(document).ready(function() {
 
   //when the user clicks it will run a function
   $("td").on("click",function(){
+    // if there are any torpedos left
+    if (torpedosLeft >= 0) {
+      // create variable to call on the id that is a string --->("44")
+      var clicked = $(this).attr("id");
+      // split the id of one string into two seperate arrau elements ---> 4,4
+      clicked.split("");
+      // the array elements will appear
+      console.log(clicked);
+      // if the first index and the second index of the board is of the same value of board [row] [column] is -1
+      if (board[clicked[0]][clicked[1]] === -1){
+        $(("#" + clicked[0] + clicked[1])).addClass("hitColor");
+        console.log($("#" + clicked[0] + clicked[1]));
+      } else {
+        $(this).addClass("missColor");
+      }
+      //create a color when user misses
 
-    var elementId;
-
-    // charAt...
-
-    // parseInt...
-
-    // board[row][column] === SHIP
-
-    if (there was a ship at location) {
-      //whenever a td is clicked, add the color in the class
-      $(this).addClass("hitColor");
-      // TODO increse numberOfShipSunk
-    } else {
-      $(this).addClass("missColor");
-    }
+      //this prints out the amount of Torpedos that the user has
+      $("#torpedoCounter").text("Torpedo Counter: " + torpedosLeft);
+        //turns the fireTorpedo off (a shot)
+      $(this).off("click");
     // calls the function to decrease torpedo total
     fireTorpedo($(this).attr("id"));
-    //this prints out the amount of Torpedos that the user has
-    $("#torpedoCounter").text("Torpedo Counter: " + torpedosLeft);
-    //turns the fireTorpedo (a shot)
-    $(this).off("click");
 
+
+}
   });
 
 }); // end document ready
@@ -62,29 +65,28 @@ var board = [[0,0,0,0,0,0,0,0,0,0],
               [0,0,0,0,0,0,0,0,0,0],
               [0,0,0,0,0,0,0,0,0,0]];
 
-// defining how many ships are sunk
-var numberOfShipSunk = 0;
 
-// Value for empty location
-var EMPTY = 0;
+
 
 // Value for ship at location
-var SHIP = 1;
-
-// Value for sunk ship at location
-var SUNK_SHIP = -1;
+var SHIP = 0;
+var row;
+var column;
 
 //purpose: randomly place 5 ships
 //signature: takes nothing and gives back an index
 //example: placeShip() -> board index[x,y]
 // function placeShip()
 function placeShip(){
-  for (var shipIndex=0; shipIndex<5; shipIndex++) {
+  while(SHIP < 5){
     var row = Math.floor(Math.random() * 10);
     var column = Math.floor(Math.random() * 10);
-    board[row][column] = SHIP;
+    SHIP = SHIP + 1;
+    board[row][column] = -1;
   }
-}
+  }
+
+
 
 // declare the amount of total torpedos left
 var torpedosLeft = 25;

@@ -10,6 +10,12 @@ td {
   width: 50px;
 }
 
+
+.missColor {
+  background-color:grey;
+}
+
+
 .hitColor {
   background-color:red;
 }
