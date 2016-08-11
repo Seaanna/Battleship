@@ -33,19 +33,24 @@ $(document).ready(function() {
       console.log(clicked);
       // if the first index and the second index of the board is of the same value of board [row] [column] is -1
       if (board[clicked[0]][clicked[1]] === -1){
+        //create a color when user misses
         $(("#" + clicked[0] + clicked[1])).addClass("hitColor");
+        counterOfHits ++;
         console.log($("#" + clicked[0] + clicked[1]));
       } else {
         $(this).addClass("missColor");
       }
-      //create a color when user misses
-
+      if (counterOfHits===5) {
+        $("#result").text("You win; you da man");
+      }
       //this prints out the amount of Torpedos that the user has
       $("#torpedoCounter").text("Torpedo Counter: " + torpedosLeft);
+      $("#hitCounter").text("Hits: " + counterOfHits);
         //turns the fireTorpedo off (a shot)
       $(this).off("click");
     // calls the function to decrease torpedo total
     fireTorpedo($(this).attr("id"));
+
 
 
 }
@@ -72,6 +77,7 @@ var board = [[0,0,0,0,0,0,0,0,0,0],
 var SHIP = 0;
 var row;
 var column;
+var counterOfHits = 0;
 
 //purpose: randomly place 5 ships
 //signature: takes nothing and gives back an index
@@ -84,7 +90,7 @@ function placeShip(){
     SHIP = SHIP + 1;
     board[row][column] = -1;
   }
-  }
+}
 
 
 
