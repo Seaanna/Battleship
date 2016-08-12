@@ -1,6 +1,16 @@
-h1 {
-  color: red;
+.jumbotron {
+  height:340px;
+  width: auto;
+  background-image: url("https://images.alphacoders.com/986/98673.jpg");
+  background-size: 1200px 480px;
+  background-repeat: no-repeat;
+  text-align: center;
+  font-family: 'Passion One', cursive;
 }
+
+ .jumbotron > h1{
+     font-size: 100px;
+ }
 
 td {
   border-style: solid;
@@ -10,16 +20,35 @@ td {
   width: 50px;
 }
 
-
-.missColor {
-  background-color:grey;
+table {
+  background-image: url("https://static.pexels.com/photos/6644/sea-water-ocean-waves.jpg");
 }
 
-
-.hitColor {
-  background-color:red;
+.missColor {
+  background-image:url("http://vignette2.wikia.nocookie.net/fnaf-world-rpg/images/f/fe/DeathX.gif/revision/latest?cb=20160123032005");
+  background-size: 50px 50px;
 }
 
 .reveal {
-  background-color: green;
+  background-image: url("https://maxgrace.files.wordpress.com/2009/10/battleship_003.jpg");
+  background-size: 50px 50px;
+}
+
+.hitColor {
+  background-image:  url("http://bestanimations.com/Military/Explosions/atomic-mushroom-cloud-explosion-2-2.gif");
+  background-size: 50px 50px;
+}
+
+p {
+  font-family: 'Passion One', cursive;
+  font-size: 40px;
+}
+
+
+.reset{
+  background-color: teal;
+}
+
+button{
+
 }
