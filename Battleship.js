@@ -1,3 +1,27 @@
+// declare a variable for the location of the td
+var board = [[0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0],
+              [0,0,0,0,0,0,0,0,0,0]];
+
+// Value for ship at location
+
+var SHIP = 0;
+// declare the amount of total torpedos left
+var torpedosLeft = 24;
+var row;
+var column;
+var counterOfHits = 0;
+var answers = [];
+// variable to show value of a ship to equal -1 on our board
+var showShips = -1;
+
  //make the document ready with jQuery
 $(document).ready(function() {
 
@@ -70,32 +94,7 @@ $(document).ready(function() {
 
 }); // end document ready
 
-// declare a variable for the location of the td
-var board = [[0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0],
-              [0,0,0,0,0,0,0,0,0,0]];
 
-
-
-
-// Value for ship at location
-
-var SHIP = 0;
-// declare the amount of total torpedos left
-var torpedosLeft = 24;
-var row;
-var column;
-var counterOfHits = 0;
-var answers = [];
-// variable to show value of a ship to equal -1 on our board
-var showShips = -1;
 
 //purpose: randomly place 5 ships
 //signature: takes nothing and gives back an index

@@ -2,41 +2,45 @@
   height:340px;
   width: auto;
   background-image: url("https://images.alphacoders.com/986/98673.jpg");
-  background-size: 1200px 480px;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   text-align: center;
   font-family: 'Passion One', cursive;
 }
 
  .jumbotron > h1{
-     font-size: 100px;
+     font-size: 12vw;
  }
 
 td {
-  border-style: solid;
-  border-color: black;
-  border-width: thin;
   height: 50px;
   width: 50px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-collapse: separate;
 }
 
 table {
   background-image: url("https://static.pexels.com/photos/6644/sea-water-ocean-waves.jpg");
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-collapse: separate;
+  margin-bottom: 30px;
 }
 
 .missColor {
   background-image:url("http://vignette2.wikia.nocookie.net/fnaf-world-rpg/images/f/fe/DeathX.gif/revision/latest?cb=20160123032005");
-  background-size: 50px 50px;
+  background-size: 99% 99%;
 }
 
 .reveal {
   background-image: url("https://maxgrace.files.wordpress.com/2009/10/battleship_003.jpg");
-  background-size: 50px 50px;
+  background-size: 99% 99%;
 }
 
 .hitColor {
   background-image:  url("http://bestanimations.com/Military/Explosions/atomic-mushroom-cloud-explosion-2-2.gif");
-  background-size: 50px 50px;
+  background-size: 99% 99%;
 }
 
 p {
@@ -45,10 +49,10 @@ p {
 }
 
 
-.reset{
+/*.reset{
   background-color: teal;
 }
 
 button{
 
-}
+}*/
