@@ -12,15 +12,15 @@ var board = [[0,0,0,0,0,0,0,0,0,0],
 
 // Value for ship at location
 
-var SHIP = 0;
+var numberOfShips = 0;
 // declare the amount of total torpedos left
 var torpedosLeft = 24;
 var row;
 var column;
 var counterOfHits = 0;
-var answers = [];
+// var answers = [];
 // variable to show value of a ship to equal -1 on our board
-var showShips = -1;
+var ship = -1;
 
  //make the document ready with jQuery
 $(document).ready(function() {
@@ -56,7 +56,7 @@ $(document).ready(function() {
       // the array elements will appear
       console.log(clicked);
       // if the first index and the second index of the board is of the same value of board [row] [column] is -1
-      if (board[clicked[0]][clicked[1]] === showShips){
+      if (board[clicked[0]][clicked[1]] === ship){
         //create a color when user misses (red)
         $(("#" + clicked[0] + clicked[1])).addClass("hitColor");
         //increase the counter of hits by 1
@@ -79,7 +79,7 @@ $(document).ready(function() {
       }
 
       //this prints out the amount of Torpedos that the user has
-      $("#torpedoCounter").text("Torpedo Counter: " + torpedosLeft);
+      $("#torpedoCounter").text(torpedosLeft);
       //text will appear to show user how many hits they have
       $("#hitCounter").text("Hits: " + counterOfHits);
         //turns the fireTorpedo off (a shot)
@@ -101,22 +101,49 @@ $(document).ready(function() {
 //example: placeShip() -> board index[x,y]
 
 function placeShip(){
-  {
-    while(SHIP < 5){
+  while(numberOfShips < 2){
     var row = Math.floor(Math.random() * 10);
     var column = Math.floor(Math.random() * 10);
-    //if the rows & columns are the same as a prior ship or they are 1 row or column next to, then this will return false, and place ship needs to get a different row & column until it's true
-    if (checkCanPlaceShipVertical(row, column) === false || checkCanPlaceShipHorizontal(row, column)=== false){
-      //The continue statement breaks one iteration (in the loop), if a specified condition occurs, and continues with the next iteration in the loop.
-      continue;
-    }
-    //adding one to the SHIP count
-    SHIP = SHIP + 1;
-    //put in the values for rows & columns into the board, and make it equal to showShips
-    board[row][column] = showShips;
+    if(numberOfShips == 0){
+      placeShipVertical(row, column);
+    } else {
+      placeShipHorizontal(row, column);
     }
   }
 }
+
+
+function placeShipVertical(row, column){
+    if (canPlaceShipVertical(row, column) === true && canPlaceShipHorizontal(row, column) === true && canPlaceShipVertical(row+1, column) === true && canPlaceShipHorizontal(row+1, column) === true && canPlaceShipVertical(row+2, column) === true && canPlaceShipHorizontal(row+2, column) === true && canPlaceShipVertical(row+3, column) === true && canPlaceShipHorizontal(row+3, column) === true && canPlaceShipVertical(row+4, column) === true && canPlaceShipHorizontal(row+4, column)){
+      //adding one to the numberOfShips count
+      numberOfShips += 1;
+      //put in the values for rows & columns into the board, and make it equal to ship
+      board[row][column] = ship;
+      board[row+1][column] = ship;
+      board[row+2][column] = ship;
+      board[row+3][column] = ship;
+      board[row+4][column] = ship;
+    }
+}
+//
+//
+// // purpose:
+// // signature:
+// // example:
+function placeShipHorizontal(row,  column){
+  if (canPlaceShipVertical(row, column) === true && canPlaceShipHorizontal(row, column) === true && canPlaceShipVertical(row, column+1) === true && canPlaceShipHorizontal(row, column+1) === true && canPlaceShipVertical(row, column+2) === true && canPlaceShipHorizontal(row, column+2) === true && canPlaceShipVertical(row, column+3) === true && canPlaceShipHorizontal(row, column+3) === true && canPlaceShipVertical(row, column+4) === true && canPlaceShipHorizontal(row, column+4)){
+    //adding one to the numberOfShips count
+    numberOfShips += 1;
+    //put in the values for rows & columns into the board, and make it equal to ship
+    board[row][column] = ship;
+    board[row][column+1] = ship;
+    board[row][column+2] = ship;
+    board[row][column+3] = ship;
+    board[row][column+4] = ship;
+  }
+  // End Drew's test code
+}
+
 
 
 
@@ -138,8 +165,8 @@ function fireTorpedo (){
    for (var row = 0; row < 10; row ++) {
     //  each column up to 10
      for (var col = 0; col < 10; col ++) {
-      //  if view of board equals showShips (both will be -1)
-       if (board[row][col] === showShips) {
+      //  if view of board equals ship (both will be -1)
+       if (board[row][col] === ship) {
         //the id will add a class of reveal to change the color of the ships to show them where they were
         $("#" + row + col).addClass("reveal");
         }
@@ -150,86 +177,55 @@ function fireTorpedo (){
 
   // Purpose: checks board column for a ship and eliminates the space around it
    // Signature: (number, number)--> boolean
-   // Example: checkCanPlaceShipVertical(1,2) -> false if ship is at position (1,2) which means
+   // Example: canPlaceShipVertical(1,2) -> false if ship is at position (1,2) which means
    // board[1][1], board[1][2], board[1][3] will also return false
-  function checkCanPlaceShipVertical(row, col) {
+  function canPlaceShipVertical(row, col) {
     //if row is 9
     if (row === 9){
-      //return boolean to check if the spot one row to the left of where the ship was placed is not equal to showShips
-      return board[row-1][col] != showShips;
+      //return boolean to check if the spot one row to the left of where the ship was placed is not equal to ship
+      return board[row-1][col] != ship &&
+             board[row][col] != ship &&
+             col < 9;
       //if row is 0
     } else if (row === 0) {
-        //return boolean to check if the spot one row to the right of where the ship was placed is not equal to showShips
-      return board[row+1][col] != showShips;
+        //return boolean to check if the spot one row to the right of where the ship was placed is not equal to ship
+      return board[row+1][col] != ship &&
+             board[row][col] != ship &&
+             col < 9;
     }
     // where we are not at the boundary of the board
     else {
-      //return boolean to check if the spot one row to the right, one spot to the left, and the spot of where the ship was placed is not equal to showShips
-      return (board[row-1][col] != showShips) &&
-             (board[row][col] != showShips) &&
-             (board[row+1][col] != showShips);
+      //return boolean to check if the spot one row to the right, one spot to the left, and the spot of where the ship was placed is not equal to ship
+      return (board[row-1][col] != ship) &&
+             (board[row][col] != ship) &&
+             (board[row+1][col] != ship) &&
+             col < 9;
     }
   }
 
   // Purpose: checks board row for a ship and eliminates the space around it
    // Signature: (number, number)--> boolean
-   // Example: checkCanPlaceShipHorizontal(5,1) -> false if ship is at position (5,1) which means
+   // Example: canPlaceShipHorizontal(5,1) -> false if ship is at position (5,1) which means
    // board[5][1], board[5][2], board[5][3] will also return false
-  function checkCanPlaceShipHorizontal(row, col) {
+  function canPlaceShipHorizontal(row, col) {
     //if column is 9
     if (col === 9){
-        //return boolean to check if the spot one column to the bottom of where the ship was placed is not equal to showShips
-      return board[row][col-1] != showShips;
+        //return boolean to check if the spot one column to the bottom of where the ship was placed is not equal to ship
+      return board[row][col-1] != ship &&
+             board[row][col] != ship &&
+             col < 9;
     } else if (col === 0) {
-        //return boolean to check if the spot one column above of where the ship was placed is not equal to showShips
-      return board[row][col+1] != showShips;
+        //return boolean to check if the spot one column above of where the ship was placed is not equal to ship
+      return board[row][col+1] != ship &&
+             board[row][col] != ship &&
+             col < 9;
     }
     // where we are not at the boundary of the board
     else {
-      //return boolean to check if the spot one column above, one spot below, and the spot of where the ship was placed is not equal to showShips
-      return (board[row][col-1] != showShips) &&
-             (board[row][col] != showShips) &&
-             (board[row][col+1] != showShips);
+      //return boolean to check if the spot one column above, one spot below, and the spot of where the ship was placed is not equal to ship
+      return (board[row][col-1] != ship) &&
+             (board[row][col] != ship) &&
+             (board[row][col+1] != ship) &&
+             col < 9;
     }
   }
-
-  // Purpose: checks board column for a ship and eliminates the space around it
-  //  Signature: (number, number)--> boolean
-  //  Example: checkCanPlaceShipVertical(1,2) -> false if ship is at position (1,2) which means
-  //  board[1][1], board[1][2], board[1][3] will also return false
-  // function checkCanPlaceShipVertical(row, col) {
-  //   //if row is 9
-  //   if (row === 9){
-  //     //return boolean to check if the spot one row to the left of where the ship was placed is not equal to showShips
-  //     return board[row-1][col] = showShips;
-  //     //if row is 0
-  //   } else if (row === 0) {
-  //       //return boolean to check if the spot one row to the right of where the ship was placed is not equal to showShips
-  //     return board[row+1][col] = showShips;
-  //   }
-  //   // where we are not at the boundary of the board
-  //   else {
-  //     //return boolean to check if the spot one row to the right, one spot to the left, and the spot of where the ship was placed is not equal to showShips
-  //     return (board[row-1][col] = showShips) &&
-  //            (board[row][col] = showShips) &&
-  //            (board[row+1][col] = showShips);
-  //   }
-  // }
-  // //
-  // // // Purpose: checks board row for a ship and eliminates the space around it
-  // //  // Signature: (number, number)--> boolean
-  // //  // Example: checkCanPlaceShipHorizontal(5,1) -> false if ship is at position (5,1) which means
-  // //  // board[5][1], board[5][2], board[5][3] will also return false
-  // // function checkCanPlaceShipHorizontal(row, col) {
-  // //   if (col === 9){
-  // //     return board[row][col-1] = showShips;
-  // //   } else if (col === 0) {
-  // //     return board[row][col+1] = showShips;
-  // //   }
-  // //   else {
-  // //     // where we are not at the boundary of the board
-  //     return (board[row][col-1] = showShips) &&
-  //            (board[row][col] = showShips) &&
-  //            (board[row][col+1] = showShips);
-  //   }
-  // }
